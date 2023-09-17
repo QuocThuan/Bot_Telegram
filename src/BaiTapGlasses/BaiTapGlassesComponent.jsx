@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import HinhAnhComponent from "./HinhAnhComponent";
-import style from "./style.module.css";
 
 export default class BaiTapGlassesComponent extends Component {
   arrGlasses = [
@@ -78,9 +76,9 @@ export default class BaiTapGlassesComponent extends Component {
     console.log(id);
     for (let item of this.arrGlasses) {
       if (item.id == id) {
-        console.log(item.id);
+        // console.log(item.id);
         let { url, name } = item;
-        console.log(url);
+        // console.log(url);
         this.setState({
           display: "inline-block",
           backgroundImage: url,
@@ -93,15 +91,20 @@ export default class BaiTapGlassesComponent extends Component {
     return (
       <div>
         <h1 className="text-center py-5">TRY GLASSES APP ONLINE</h1>
-        <div className="py-5">
-          <div className="d-flex justify-content-center w-25 mx-auto position-relative ">
-            <img className="w-50 " src="./glassesImage/model.jpg" alt="" />
+        <div className="py-5 my-5 ">
+          <div className="py-5 my-5 w-25 mx-auto position-relative">
+            <div
+              className="img w-50 position-absolute "
+              style={{ left: "100px", top: "-110px", zIndex: "3" }}
+            >
+              <img className="w-100  " src="./glassesImage/model.jpg" alt="" />
+            </div>
             <div
               style={{
                 display: this.state.display,
                 position: "absolute",
-                top: "60px",
-                left: "134px",
+                top: "-50px",
+                left: "139px",
                 backgroundImage: `url(${this.state.backgroundImage})`,
                 backgroundSize: "contain",
                 backgroundRepeat: "no-repeat",
@@ -114,22 +117,23 @@ export default class BaiTapGlassesComponent extends Component {
               style={{
                 display: this.state.display,
                 position: "absolute",
-                bottom: "0",
+                bottom: "-22px",
                 left: "103px",
                 width: "188px",
                 zIndex: "5",
                 fontSize: "10px",
+                backgroundColor: "rgb(252, 190, 65)",
               }}
             >
               <h5 className="text-primary">{this.state.name}</h5>
-              <p className="mb-0">
+              <p className="mb-0 text-white">
                 Light pink square lenses define these sunglasses, ending with
                 amother of pearl effect tip.{" "}
               </p>
             </div>
           </div>
         </div>
-        <div className="py-4 d-flex justify-content-center my-5">
+        <div className="py-4 d-flex justify-content-center mt-5">
           <div
             className="w-50 mx-auto py-4"
             id="showGlasses"
