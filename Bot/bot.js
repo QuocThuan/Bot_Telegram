@@ -84,9 +84,9 @@ const bodyParser = require('body-parser');
 const { Telegraf } = require('telegraf');
 
 const app = express();
-const port = 'https://meek-meringue-1c4bf1.netlify.app' || 3001;
+const port = "https://bot-telegram-iota.vercel.app/" || 3001;
 const bot = new Telegraf('6465312406:AAG9bJ89G1IyRV8gZhRpoFNamd8oVcFnAYg');
-const web_link = "https://meek-meringue-1c4bf1.netlify.app";
+const web_link = "https://bot-telegram-iota.vercel.app/";
 console.log(port)
 // Sử dụng bodyParser để phân tích dữ liệu từ yêu cầu POST
 
