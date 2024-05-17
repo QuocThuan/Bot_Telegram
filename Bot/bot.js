@@ -84,7 +84,7 @@ const bodyParser = require('body-parser');
 const { Telegraf } = require('telegraf');
 
 const app = express();
-const port = process.env.PORT;
+const port = 'https://meek-meringue-1c4bf1.netlify.app' || 3001;
 const bot = new Telegraf('6465312406:AAG9bJ89G1IyRV8gZhRpoFNamd8oVcFnAYg');
 const web_link = "https://meek-meringue-1c4bf1.netlify.app";
 console.log(port)
