@@ -4,6 +4,9 @@ import Card from "./Components/Card/Card";
 import Cart from "./Components/Cart/Cart";
 const { getData } = require("./db/db");
 const foods = getData();
+const express = require('express');
+const app = express();
+
 
 const tele = window.Telegram.WebApp;
 
@@ -40,17 +43,36 @@ function App() {
     }
   };
 
-  const onCheckout = (data) => {
-    console.log(data)
-    fetch('/increment', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    }).then((res) => console.log(res.json()));
-    tele.MainButton.text = "Pay :)";
-    tele.MainButton.show();
+  const onCheckout = () => {
+    // fetch('/increment', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify(data)
+    // }).then((res) => console.log(res.json()));
+    // tele.MainButton.text = "Pay :)";
+    // tele.MainButton.show();
+    app.post('/increment', (req, res) => {
+
+      let data = ''
+
+      req.on('data', chunk => {
+        data += chunk.toString();
+      })
+
+      req.on('end', () => {
+        console.log('Received data:', data);
+
+        bot.telegram.sendMessage('7003593765', `Total price: ${data} $`);
+
+        // Phản hồi về cho trang web
+        res.status(200).send('Data received');
+      })
+    });
+    app.use(bodyParser.json());
+
+    bot.launch();
   };
 
   // const clickCount = () => {
