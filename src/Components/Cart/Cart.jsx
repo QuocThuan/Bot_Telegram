@@ -1,6 +1,6 @@
 import React from "react";
 import "./Cart.css";
-import Button from "../Button/Button";
+import Button from "../Button/Button.jsx";
 function Cart({ cartItems, onCheckout }) {
   const totalPrice = cartItems.reduce((a, c) => a + c.price * c.quantity, 0);
 

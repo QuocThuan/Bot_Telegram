@@ -6,7 +6,7 @@ const { Telegraf } = require('telegraf');
 const app = express();
 const port = process.env.TZ || 3000;
 const bot = new Telegraf('6465312406:AAG9bJ89G1IyRV8gZhRpoFNamd8oVcFnAYg');
-const web_link = "localhost:3030";
+const web_link = "https://bot-telegram-iota.vercel.app/";
 
 bot.start((ctx) =>
     ctx.reply("Welcome :)))))", {
@@ -34,12 +34,16 @@ app.post('/increment', (req, res) => {
         res.status(200).send('Data received');
     })
 
-
 });
 
 app.use(bodyParser.json());
 
 bot.launch();
+
+app.use((req, res, next) => {
+    res.setHeader("Content-Security-Policy", "default-src 'none'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com;");
+    next();
+});
 
 // Lắng nghe yêu cầu trên cổng được cung cấp hoặc cổng mặc định 3000
 app.listen(port, () => {
