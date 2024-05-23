@@ -41,21 +41,27 @@ function App() {
     }
   };
 
+  const params = new URLSearchParams(window.location.search);
+  const username = params.get('username');
+
   const onCheckout = (data) => {
-    fetch('/increment', {
+    const dataToSend = {
+      user: username,
+      data,
+    }
+    fetch('/telegram-webhook', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(dataToSend)
     }).then((res) => console.log(res.json())).catch((err) => console.log(err));
     tele.MainButton.text = "Pay :))";
     tele.MainButton.show();
 
   };
 
-  const params = new URLSearchParams(window.location.search);
-  const username = params.get('username');
+
 
   return (
     <>

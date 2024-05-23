@@ -43,11 +43,18 @@ app.post('/increment', (req, res) => {
 
 app.use(bodyParser.json());
 
-bot.on('text', async (ctx) => {
+// bot.on('text', async (ctx) => {
 
-    await ctx.telegram.sendMessage('7003593765', `Data: ${receivedData} `)
+//     await ctx.telegram.sendMessage('7003593765', `Data: ${receivedData} `)
 
-})
+// })
+
+bot.on('/telegram-webhook', (ctx) => {
+    const { username, message } = ctx.message;
+
+    // Xử lý dữ liệu
+    console.log(`Received message from ${username}: ${message}`);
+});
 
 // function sendQuiz(chatId, question, options, extra) {
 //     return bot.telegram.sendPoll(chatId, question, options, { type: 'quiz', ...extra });
