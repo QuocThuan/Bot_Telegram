@@ -22,24 +22,24 @@ bot.start((ctx) => {
 let receivedData = '';
 
 // Định nghĩa endpoint POST '/increment'
-app.post('/increment', (req, res) => {
+// app.post('/increment', (req, res) => {
 
-    let data = ''
+//     let data = ''
 
-    req.on('data', chunk => {
-        data += chunk.toString();
-    })
+//     req.on('data', chunk => {
+//         data += chunk.toString();
+//     })
 
-    req.on('end', () => {
-        console.log('Received data:', data);
+//     req.on('end', () => {
+//         console.log('Received data:', data);
 
-        receivedData = data;
+//         receivedData = data;
 
-        bot.telegram.sendMessage('7003593765', `Total price: ${data} $`);
+//         bot.telegram.sendMessage('7003593765', `Total price: ${data} $`);
 
-    })
+//     })
 
-});
+// });
 
 app.use(bodyParser.json());
 
@@ -48,12 +48,13 @@ app.use(bodyParser.json());
 //     await ctx.telegram.sendMessage('7003593765', `Data: ${receivedData} `)
 
 // })
-
+console.log('first')
 bot.on('/telegram-webhook', (ctx) => {
-    const { username, message } = ctx.message;
+    const { username, data } = ctx.message;
 
     // Xử lý dữ liệu
-    console.log(`Received message from ${username}: ${message}`);
+    console.log(`Received message from ${username}: ${data}`);
+    bot.telegram.sendMessage('7003593765', `Total price: ${data} $`);
 });
 
 // function sendQuiz(chatId, question, options, extra) {
