@@ -51,15 +51,16 @@ function App() {
     }).then((res) => console.log(res.json())).catch((err) => console.log(err));
     tele.MainButton.text = "Pay :))";
     tele.MainButton.show();
+
   };
 
-  // const clickCount = () => {
-  //   fetch('/increment', { method: 'POST' });
-  // }
+  const params = new URLSearchParams(window.location.search);
+  const username = params.get('username');
 
   return (
     <>
       <h1 className="heading">Order Food</h1>
+      <h2 className="heading">Welcome, {username}</h2>
       {/* <button onClick={() => { clickCount() }}>Count</button> */}
       <Cart cartItems={cartItems} onCheckout={onCheckout} />
       <div className="cards__container">
