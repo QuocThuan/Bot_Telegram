@@ -48,14 +48,20 @@ app.use(bodyParser.json());
 //     await ctx.telegram.sendMessage('7003593765', `Data: ${receivedData} `)
 
 // })
-console.log('first')
-bot.on('/telegram-webhook', (ctx) => {
-    const { username, data } = ctx.message;
+app.post('/telegram-webhook', (req, res) => {
+    const { username, data } = req.body; // Lấy dữ liệu từ request body
 
-    // Xử lý dữ liệu
-    console.log(`Received message from ${username}: ${data}`);
-    bot.telegram.sendMessage('7003593765', `Total price: ${data} $`);
+    if (username && data) {
+        console.log(`Received message from ${username}: ${data}`);
+        bot.telegram.sendMessage('7003593765', `Total price: ${data} $`);
+        res.status(200).send('Data received and message sent to bot.');
+    } else {
+        res.status(400).send('Invalid data.');
+    }
 });
+
+bot.launch();
+
 
 // function sendQuiz(chatId, question, options, extra) {
 //     return bot.telegram.sendPoll(chatId, question, options, { type: 'quiz', ...extra });
@@ -161,17 +167,16 @@ bot.on('/telegram-webhook', (ctx) => {
 //     }
 // });
 
-bot.launch();
 
-app.use((req, res, next) => {
-    res.setHeader("Content-Security-Policy", "default-src 'none'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com;");
-    next();
-});
+// app.use((req, res, next) => {
+//     res.setHeader("Content-Security-Policy", "default-src 'none'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com;");
+//     next();
+// });
 
 // Lắng nghe yêu cầu trên cổng được cung cấp hoặc cổng mặc định 3000
-app.listen(port, () => {
-    console.log(`Web server is listening on port ${port}`);
-});
+// app.listen('https://bot-telegram-iota.vercel.app?username=${encodeURIComponent(username)}', () => {
+//     console.log(`Web server is listening on port ${port}`);
+// });
 
 
 

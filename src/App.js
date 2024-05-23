@@ -49,7 +49,7 @@ function App() {
       user: username,
       data,
     }
-    fetch('/telegram-webhook', {
+    fetch('https://bot-telegram-iota.vercel.app/telegram-webhook', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
