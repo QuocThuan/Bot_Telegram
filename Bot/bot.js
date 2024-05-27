@@ -9,7 +9,6 @@ const bot = new Telegraf('6465312406:AAG9bJ89G1IyRV8gZhRpoFNamd8oVcFnAYg');
 
 bot.start((ctx) => {
     const username = ctx.from.username || ctx.from.first_name;
-    console.log(username)
     const web_link = `https://bot-telegram-iota.vercel.app?username=${encodeURIComponent(username)}`;
 
     ctx.reply("Welcome :)))))", {
@@ -51,6 +50,7 @@ app.use(bodyParser.json());
 app.post('/telegram-webhook', (req, res) => {
     const { username, data } = req.body; // Lấy dữ liệu từ request body
 
+    console.log(username)
     if (username && data) {
         console.log(`Received message from ${username}: ${data}`);
         bot.telegram.sendMessage('7003593765', `Total price: ${data} $`);

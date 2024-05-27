@@ -41,23 +41,26 @@ function App() {
     }
   };
 
+  const webapp = window.Telegram.WebApp;
+  webapp.expand()
   const params = new URLSearchParams(window.location.search);
   const username = params.get('username');
 
   const onCheckout = (data) => {
     const dataToSend = {
-      user: username,
+      username,
       data,
     }
-    fetch('https://bot-telegram-iota.vercel.app/telegram-webhook', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(dataToSend)
-    }).then((res) => console.log(res.json())).catch((err) => console.log(err));
-    tele.MainButton.text = "Pay :))";
-    tele.MainButton.show();
+    webapp.sendData(JSON.stringify(dataToSend));
+    // fetch('https://bot-telegram-iota.vercel.app/telegram-webhook', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify(dataToSend)
+    // }).then((res) => console.log(res.json())).catch((err) => console.log(err));
+    // tele.MainButton.text = "Pay :))";
+    // tele.MainButton.show();
 
   };
 
