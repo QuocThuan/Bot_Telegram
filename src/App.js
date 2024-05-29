@@ -41,24 +41,31 @@ function App() {
     }
   };
 
+
+
   const webapp = window.Telegram.WebApp;
   webapp.expand()
   const params = new URLSearchParams(window.location.search);
   const username = params.get('username');
 
   const onCheckout = (data) => {
+
     const dataToSend = {
       username,
       data,
-    }
-    webapp.sendData(JSON.stringify(dataToSend));
-    // fetch('https://bot-telegram-iota.vercel.app/telegram-webhook', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify(dataToSend)
-    // }).then((res) => console.log(res.json())).catch((err) => console.log(err));
+    };
+    fetch('https://7196-2001-ee0-4f95-a910-74c2-a4aa-f324-e9cb.ngrok-free.app/telegram-webhook', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(dataToSend)
+    })
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch(error => console.error('Error:', error));
+
+
     // tele.MainButton.text = "Pay :))";
     // tele.MainButton.show();
 
@@ -66,10 +73,11 @@ function App() {
 
 
 
+
   return (
     <>
       <h1 className="heading">Order Food</h1>
-      <h2 className="heading">Welcome, {username}</h2>
+      <h2 className="heading">Welcome, {username} </h2>
       {/* <button onClick={() => { clickCount() }}>Count</button> */}
       <Cart cartItems={cartItems} onCheckout={onCheckout} />
       <div className="cards__container">
